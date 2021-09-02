@@ -1,9 +1,27 @@
+
+axios.get("https://api.github.com/users/pjaepole").then(resp=>{
+  console.log('thisis',resp.data);
+})
+
+
+
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-
+// const getGit= async()=>{
+//   try{
+//     const userinfo= await axios.get("https://api.github.com/users/pjaepole");
+  
+//   }
+// }
+// // console.log(userinfo);}
+// //   catch(err){
+// //   const errorText=document.createElement('p');
+// //   errorText.textContent="fffffffffffffffffffffffffffffffff";
+// //   document.body.appendChild(errorText);
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -39,6 +57,7 @@ const followersArray = [];
       <div class="card-info">
         <h3 class="name">{users name}</h3>
         <p class="username">{users user name}</p>
+
         <p>Location: {users location}</p>
         <p>Profile:
           <a href={address to users github page}>{address to users github page}</a>
@@ -49,6 +68,64 @@ const followersArray = [];
       </div>
     </div>
 */
+
+function makeGit(){
+  // added element
+  const card=document.createElement('div');
+    const userImg=document.createElement('img');
+    const cardInfo=document.createElement('div');
+      const username=document.createElement('h3');
+      const usernameP=document.createElement('p');
+      const userlocation=document.createElement('p');
+      const userprofile=document.createElement('p');
+          const userprofileAtag=document.createElement('a');
+      const follower=document.createElement('p');
+      const following=document.createElement('p');
+      const userBio=document.createElement('p');
+
+  //setting structure
+  card.appendChild(userImg);
+  card.appendChild(cardInfo);
+      cardInfo.appendChild(username);
+      cardInfo.appendChild(usernameP);
+      cardInfo.appendChild(userlocation);
+      cardInfo.appendChild(userprofile);
+            userprofile.appendChild(userprofileAtag);
+      cardInfo.appendChild(follower);
+      cardInfo.appendChild(following);
+      cardInfo.appendChild(userBio);
+
+  //adding class name
+  card.classList.add('card');
+  cardInfo.classList.add('card-info');
+      username.classList.add('name');
+      usernameP.classList.add('username')
+
+                                  //adding text content neeed to update ${}
+                                    username.textContent=`${usersname}` ;
+                                    usernameP.textContent= `${usersusername}`;
+                                    userlocation.textContent=`Location: ${notdefinedyet}`;
+                                    userprofile.textContent="Profile:";
+                                        userprofileAtag.textContent="${address to user git hub page}"
+                                    follower.textContent=`Followers: ${usersfollowerscount}`;
+                                    following.textContent=`Following: ${usersFollowingCount}`;
+                                    userBio.textContent=`Bio: ${usersBio}`;
+
+                                  //setting href and src to userImg and userprofileAtag
+                                  userImg.src="imgurl" ;
+                                  userprofileAtag.href="adresstousergithubpage";           
+                                  
+
+
+
+}
+
+
+
+
+
+
+
 
 /*
   List of LS Instructors Github username's:

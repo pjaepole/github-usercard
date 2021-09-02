@@ -1,7 +1,9 @@
+const placement=document.querySelector('.cards');
 
-axios.get("https://api.github.com/users/pjaepole").then(resp=>{
-  console.log('thisis',resp.data);
-})
+
+axios.get("https://api.github.com/users/tetondan").then(resp=>{
+  console.log('mygithub',resp.data);
+});
 
 
 
@@ -11,17 +13,69 @@ axios.get("https://api.github.com/users/pjaepole").then(resp=>{
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-// const getGit= async()=>{
-//   try{
-//     const userinfo= await axios.get("https://api.github.com/users/pjaepole");
-  
+const followersArray = ["tetondan",
+"dustinmyers",
+"justsml",
+"luishrd",
+"bigknell"];
+
+
+// axios.get(`https://api.github.com/users/${}`)
+//   .then(resp=>{
+//   console.log('mygithub',resp.data);
+//   const personinformation={name: resp.data.name, login: resp.data.login, location:resp.data.location, html_url:resp.data.html_url, followers:resp.data.followers, following:resp.data.following, bio:resp.data.bio, avatar_url:resp.data.avatar_url}
+//   const needtomakename =makeGit(personinformation)
+//    placement.appendChild(needtomakename); 
+// })  
+//   .catch(err=>{
+//     console.error(err);
+//   })
+//   .finally(()=>{
+//     console.log('finally');
 //   }
-// }
-// // console.log(userinfo);}
-// //   catch(err){
-// //   const errorText=document.createElement('p');
-// //   errorText.textContent="fffffffffffffffffffffffffffffffff";
-// //   document.body.appendChild(errorText);
+//   )
+
+followersArray.forEach(follower=>{
+  axios.get(`https://api.github.com/users/${follower}`)
+  .then(resp=>{
+  console.log('mygithub',resp.data);
+  const personinformation={name: resp.data.name, login: resp.data.login, location:resp.data.location, html_url:resp.data.html_url, followers:resp.data.followers, following:resp.data.following, bio:resp.data.bio, avatar_url:resp.data.avatar_url}
+  const needtomakename =makeGit(personinformation)
+   placement.appendChild(needtomakename); 
+})  
+  .catch(err=>{
+    console.error(err);
+  })
+  .finally(()=>{
+    console.log('finally');
+  }
+  )
+})
+
+
+
+
+
+
+
+// working 
+axios.get("https://api.github.com/users/pjaepole")
+  .then(resp=>{
+  console.log('mygithub',resp.data);
+  const personinformation={name: resp.data.name, login: resp.data.login, location:resp.data.location, html_url:resp.data.html_url, followers:resp.data.followers, following:resp.data.following, bio:resp.data.bio, avatar_url:resp.data.avatar_url}
+  const needtomakename =makeGit(personinformation)
+   placement.appendChild(needtomakename); 
+})  
+  .catch(err=>{
+    console.error(err);
+  })
+  .finally(()=>{
+    console.log('finally');
+  }
+  )
+
+
+
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -46,7 +100,7 @@ axios.get("https://api.github.com/users/pjaepole").then(resp=>{
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -69,7 +123,7 @@ const followersArray = [];
     </div>
 */
 
-function makeGit(){
+function makeGit({name,login,location,html_url,followers,following,bio,avatar_url}){
   // added element
   const card=document.createElement('div');
     const userImg=document.createElement('img');
@@ -80,7 +134,7 @@ function makeGit(){
       const userprofile=document.createElement('p');
           const userprofileAtag=document.createElement('a');
       const follower=document.createElement('p');
-      const following=document.createElement('p');
+      const followingg=document.createElement('p');
       const userBio=document.createElement('p');
 
   //setting structure
@@ -92,7 +146,7 @@ function makeGit(){
       cardInfo.appendChild(userprofile);
             userprofile.appendChild(userprofileAtag);
       cardInfo.appendChild(follower);
-      cardInfo.appendChild(following);
+      cardInfo.appendChild(followingg);
       cardInfo.appendChild(userBio);
 
   //adding class name
@@ -102,22 +156,22 @@ function makeGit(){
       usernameP.classList.add('username')
 
                                   //adding text content neeed to update ${}
-                                    username.textContent=`${usersname}` ;
-                                    usernameP.textContent= `${usersusername}`;
-                                    userlocation.textContent=`Location: ${notdefinedyet}`;
-                                    userprofile.textContent="Profile:";
-                                        userprofileAtag.textContent="${address to user git hub page}"
-                                    follower.textContent=`Followers: ${usersfollowerscount}`;
-                                    following.textContent=`Following: ${usersFollowingCount}`;
-                                    userBio.textContent=`Bio: ${usersBio}`;
+                                      username.textContent=`${name}` ;
+                                      usernameP.textContent= `${login}`;
+                                      userlocation.textContent=`Location: ${location}`;
+                                      userprofile.textContent="Profile:";
+                                          userprofileAtag.textContent=`${html_url}`
+                                      follower.textContent=`Followers: ${followers}`;
+                                      followingg.textContent=`Following: ${following}`;
+                                      userBio.textContent=`Bio: ${bio}`;
 
                                   //setting href and src to userImg and userprofileAtag
-                                  userImg.src="imgurl" ;
-                                  userprofileAtag.href="adresstousergithubpage";           
+                                  userImg.src=avatar_url ;
+                                  userprofileAtag.href=html_url;           
                                   
 
-
-
+  //don't forget to return since it is a function
+  return card;
 }
 
 

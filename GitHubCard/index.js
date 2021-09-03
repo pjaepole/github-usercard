@@ -131,8 +131,13 @@ function makeGit({name,login,location,html_url,followers,following,bio,avatar_ur
       const username=document.createElement('h3');
       const usernameP=document.createElement('p');
       const userlocation=document.createElement('p');
+
+      const userprofileContainer=document.createElement('div')
+              userprofileContainer.style.display="flex";
       const userprofile=document.createElement('p');
-          const userprofileAtag=document.createElement('a');
+      const userprofileAtag=document.createElement('a');
+                userprofileAtag.style.fontSize="1.4rem"
+
       const follower=document.createElement('p');
       const followingg=document.createElement('p');
       const userBio=document.createElement('p');
@@ -143,8 +148,13 @@ function makeGit({name,login,location,html_url,followers,following,bio,avatar_ur
       cardInfo.appendChild(username);
       cardInfo.appendChild(usernameP);
       cardInfo.appendChild(userlocation);
-      cardInfo.appendChild(userprofile);
-            userprofile.appendChild(userprofileAtag);
+      
+      cardInfo.appendChild(userprofileContainer);
+      
+      userprofileContainer.appendChild(userprofile);
+      userprofileContainer.appendChild(userprofileAtag);
+            
+
       cardInfo.appendChild(follower);
       cardInfo.appendChild(followingg);
       cardInfo.appendChild(userBio);
@@ -159,15 +169,21 @@ function makeGit({name,login,location,html_url,followers,following,bio,avatar_ur
                                       username.textContent=`${name}` ;
                                       usernameP.textContent= `${login}`;
                                       userlocation.textContent=`Location: ${location}`;
-                                      userprofile.textContent="Profile:";
-                                          userprofileAtag.textContent=`${html_url}`
+                                      
+                                      
+                                      
+                                      userprofile.innerHTML='Profile:';
+                                      userprofileAtag.textContent=html_url;
+                                         
                                       follower.textContent=`Followers: ${followers}`;
                                       followingg.textContent=`Following: ${following}`;
                                       userBio.textContent=`Bio: ${bio}`;
 
                                   //setting href and src to userImg and userprofileAtag
-                                  userImg.src=avatar_url ;
-                                  userprofileAtag.href=html_url;           
+                                  userImg.src=avatar_url;
+                                  userprofileAtag.href=html_url;
+                                  
+
                                   
 
   //don't forget to return since it is a function
